@@ -1,0 +1,4 @@
+module,description,date
+checkout,gateway fora do ar 22 min,2026-02-14
+checkout,cobranca duplicada em parcelamento,2026-03-05
+auth,sessao nao expirava corretamente,2026-01-20

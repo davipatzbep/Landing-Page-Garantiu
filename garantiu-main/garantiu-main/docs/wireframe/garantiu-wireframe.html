@@ -1,0 +1,889 @@
+<title>garantiu — wireframe do dashboard</title>
+<style>
+  :root {
+    --paper: #eef0f3;
+    --panel: #ffffff;
+    --panel-2: #f7f8fa;
+    --ink: #1b2430;
+    --ink-soft: #566072;
+    --line: #b7c0cc;
+    --line-soft: #dce1e7;
+    --accent: #2f5de0;
+    --accent-ink: #ffffff;
+    --risk-hi: #c8443b;
+    --risk-mid: #b9791c;
+    --risk-lo: #2a8f62;
+    --risk-hi-bg: #fbe9e7;
+    --risk-mid-bg: #faf1de;
+    --risk-lo-bg: #e7f4ee;
+    --shadow: 0 1px 0 rgba(27, 36, 48, 0.04);
+    --mono: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #12161d;
+      --panel: #1a212b;
+      --panel-2: #212936;
+      --ink: #e7eaef;
+      --ink-soft: #96a1b2;
+      --line: #3c4655;
+      --line-soft: #262e3a;
+      --accent: #7292ff;
+      --accent-ink: #0e1320;
+      --risk-hi: #ff8478;
+      --risk-mid: #f0b955;
+      --risk-lo: #55d19b;
+      --risk-hi-bg: #2c1a1a;
+      --risk-mid-bg: #2b2416;
+      --risk-lo-bg: #12281f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #12161d;
+    --panel: #1a212b;
+    --panel-2: #212936;
+    --ink: #e7eaef;
+    --ink-soft: #96a1b2;
+    --line: #3c4655;
+    --line-soft: #262e3a;
+    --accent: #7292ff;
+    --accent-ink: #0e1320;
+    --risk-hi: #ff8478;
+    --risk-mid: #f0b955;
+    --risk-lo: #55d19b;
+    --risk-hi-bg: #2c1a1a;
+    --risk-mid-bg: #2b2416;
+    --risk-lo-bg: #12281f;
+  }
+  :root[data-theme="light"] {
+    --paper: #eef0f3;
+    --panel: #ffffff;
+    --panel-2: #f7f8fa;
+    --ink: #1b2430;
+    --ink-soft: #566072;
+    --line: #b7c0cc;
+    --line-soft: #dce1e7;
+    --accent: #2f5de0;
+    --accent-ink: #ffffff;
+    --risk-hi: #c8443b;
+    --risk-mid: #b9791c;
+    --risk-lo: #2a8f62;
+    --risk-hi-bg: #fbe9e7;
+    --risk-mid-bg: #faf1de;
+    --risk-lo-bg: #e7f4ee;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+
+  .app {
+    display: grid;
+    grid-template-columns: 272px 1fr;
+    min-height: 100vh;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .rail {
+    border-right: 1px solid var(--line-soft);
+    padding: 28px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .wordmark {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+  }
+  .wordmark .cursor {
+    display: inline-block;
+    width: 9px;
+    height: 18px;
+    background: var(--accent);
+    animation: blink 1.1s steps(1) infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wordmark .cursor { animation: none; opacity: 1; }
+  }
+  @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+  .tagline {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .tagline strong { color: var(--ink); }
+
+  .rail-label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 4px;
+  }
+
+  nav.steps { display: flex; flex-direction: column; gap: 4px; }
+  .step-btn {
+    all: unset;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+  }
+  .step-btn:hover { background: var(--panel-2); }
+  .step-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .step-btn .n {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    padding-top: 1px;
+  }
+  .step-btn .t {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .step-btn .d {
+    display: block;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    margin-top: 2px;
+    line-height: 1.35;
+  }
+  .step-btn[aria-current="true"] {
+    background: var(--panel);
+    border-color: var(--line-soft);
+    box-shadow: var(--shadow);
+  }
+  .step-btn[aria-current="true"] .n { color: var(--accent); }
+  .step-btn[aria-current="true"] .t { color: var(--accent); }
+
+  .rail-foot {
+    margin-top: auto;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    border-top: 1px dashed var(--line-soft);
+    padding-top: 14px;
+  }
+
+  /* ---------- Stage ---------- */
+  .stage { padding: 28px 40px 60px; max-width: 1120px; margin: 0 auto; }
+  .stage-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .stage-head h1 {
+    font-size: 21px;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .stage-head .meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+
+  .canvas {
+    position: relative;
+    background: var(--panel);
+    border: 1px solid var(--line-soft);
+    border-radius: 10px;
+    padding: 26px 28px 28px;
+    box-shadow: var(--shadow);
+  }
+  .canvas::before, .canvas::after,
+  .canvas .tick-br, .canvas .tick-bl {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--line);
+    opacity: 0.7;
+  }
+  .canvas::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+  .canvas::after { top: -1px; right: -1px; border-left: none; border-bottom: none; }
+  .canvas .tick-bl { bottom: -1px; left: -1px; border-right: none; border-top: none; }
+  .canvas .tick-br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+  .screen[hidden] { display: none; }
+
+  .note {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: var(--panel-2);
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .note b { color: var(--ink); font-weight: 600; }
+  .note .open {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--line-soft);
+  }
+  .note .open span {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ---------- Wireframe primitives ---------- */
+  .wf-box {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--panel);
+  }
+  .wf-block { background: var(--line-soft); border-radius: 4px; }
+  .placeholder-text {
+    color: var(--ink-soft);
+    font-size: 12px;
+  }
+  label.wf-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .field {
+    border: 1px dashed var(--line);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--panel-2);
+  }
+  .field .caret { color: var(--ink-soft); font-size: 11px; font-family: var(--mono); }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    cursor: default;
+  }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); }
+  .btn.ghost { background: transparent; border-color: var(--line); color: var(--ink); }
+  .btn.danger-outline { background: transparent; border-color: var(--risk-hi); color: var(--risk-hi); }
+
+  .grid-2 { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .stack { display: flex; flex-direction: column; gap: 14px; }
+  .row { display: flex; align-items: center; gap: 10px; }
+
+  h2.scr-title { font-size: 15px; margin: 0 0 4px; }
+  p.scr-sub { margin: 0 0 20px; font-size: 12.5px; color: var(--ink-soft); }
+
+  .chip {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    padding: 4px 9px;
+    border-radius: 100px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+  .chip.hi { background: var(--risk-hi-bg); color: var(--risk-hi); }
+  .chip.mid { background: var(--risk-mid-bg); color: var(--risk-mid); }
+  .chip.lo { background: var(--risk-lo-bg); color: var(--risk-lo); }
+  .chip.flaky { background: var(--risk-mid-bg); color: var(--risk-mid); }
+  .chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+  table.wf-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  table.wf-table th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 600;
+    padding: 0 10px 8px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  table.wf-table td {
+    padding: 10px 10px;
+    border-bottom: 1px solid var(--line-soft);
+    vertical-align: middle;
+  }
+  table.wf-table tr:last-child td { border-bottom: none; }
+  .mono-num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  /* meter / gauge */
+  .meter { display: flex; flex-direction: column; gap: 6px; }
+  .meter .track {
+    height: 10px;
+    border-radius: 100px;
+    background: var(--line-soft);
+    position: relative;
+    overflow: hidden;
+  }
+  .meter .fill { height: 100%; border-radius: 100px; }
+  .meter .scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    color: var(--ink-soft);
+  }
+
+  .factor-row { display: grid; grid-template-columns: 160px 1fr 46px; align-items: center; gap: 12px; }
+  .factor-row .label { font-size: 12.5px; }
+  .factor-row .val { font-family: var(--mono); font-size: 12px; text-align: right; }
+  .factor-track { height: 7px; border-radius: 100px; background: var(--line-soft); }
+  .factor-fill { height: 100%; border-radius: 100px; background: var(--ink-soft); }
+
+  .score-hero {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .score-num {
+    font-family: var(--mono);
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--risk-hi);
+    flex-shrink: 0;
+  }
+  .score-num small { font-size: 15px; color: var(--ink-soft); font-weight: 500; }
+  .score-detail { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 340px; }
+
+  .bars-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 40px;
+    height: 128px;
+    padding: 0 4px;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+  .bar-pair { display: flex; flex-direction: column; align-items: center; gap: 7px; width: 52px; }
+  .bar-pair .bars { display: flex; align-items: flex-end; gap: 6px; height: 88px; }
+  .bar-pair .bar { width: 14px; border-radius: 2px 2px 0 0; background: var(--line); }
+  .bar-pair .bar.real { background: var(--ink-soft); }
+  .bar-pair .tag { font-family: var(--mono); font-size: 9.5px; color: var(--ink-soft); }
+  .bar-pair .dot { width: 6px; height: 6px; border-radius: 50%; }
+
+  .legend { display: flex; justify-content: center; gap: 20px; font-size: 11px; color: var(--ink-soft); margin-top: 14px; }
+  .legend .sw { width: 9px; height: 9px; display: inline-block; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+
+  .diff-box {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    background: var(--panel-2);
+    border: 1px solid var(--line-soft);
+    border-radius: 6px;
+    padding: 12px 14px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .diff-box .add { color: var(--risk-lo); }
+  .diff-box .rem { color: var(--risk-hi); }
+
+  .checklist { display: flex; flex-direction: column; gap: 10px; }
+  .check-item { display: flex; align-items: center; gap: 10px; font-size: 12.5px; }
+  .check-item .box { width: 15px; height: 15px; border: 1.5px solid var(--line); border-radius: 4px; flex-shrink: 0; }
+  .check-item .box.done { background: var(--ink-soft); border-color: var(--ink-soft); }
+
+  .breadcrumb { font-family: var(--mono); font-size: 11px; color: var(--ink-soft); margin-bottom: 14px; }
+  .breadcrumb .cur { color: var(--ink); }
+
+  /* ---------- QA summary card ---------- */
+  .qa-card {
+    border: 1px solid var(--line-soft);
+    border-radius: 8px;
+    padding: 18px 20px;
+    background: var(--panel-2);
+  }
+  .qa-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .qa-card-title { font-size: 14.5px; font-weight: 600; }
+  .qa-field { margin-bottom: 12px; }
+  .qa-field:last-of-type { margin-bottom: 0; }
+  .qa-text { margin: 0; font-size: 13px; line-height: 1.55; max-width: 62ch; }
+  .qa-list { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.7; }
+  .dev-note {
+    margin-top: 14px;
+    padding: 10px 14px;
+    border-left: 3px solid var(--accent);
+    background: var(--panel);
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    border-radius: 0 6px 6px 0;
+  }
+  .dev-note-author { font-family: var(--mono); font-weight: 600; color: var(--ink); }
+  .dev-note.empty { border-left-color: var(--line); font-style: italic; }
+
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+
+  @media (max-width: 880px) {
+    .app { grid-template-columns: 1fr; }
+    .rail { position: relative; height: auto; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .stage { padding: 20px; }
+  }
+</style>
+
+<div class="app">
+  <aside class="rail">
+    <div>
+      <div class="wordmark">garantiu<span class="cursor" aria-hidden="true"></span></div>
+      <p class="tagline">Wireframe · dia 1/3 · <strong>sujeito a mudanças</strong></p>
+    </div>
+
+    <div>
+      <p class="rail-label">Fluxo (7 telas)</p>
+      <nav class="steps" id="steps" aria-label="Telas do wireframe"></nav>
+    </div>
+
+    <div class="rail-foot">
+      Tema 4 — "Dá para entregar com segurança?"<br>
+      Score de risco = mudança + bugs históricos +<br>saúde dos testes + incidentes.
+    </div>
+  </aside>
+
+  <main class="stage">
+    <div class="stage-head">
+      <h1 id="stage-title">—</h1>
+      <div class="meta" id="stage-meta">—</div>
+    </div>
+
+    <div class="canvas">
+      <span class="tick-bl" aria-hidden="true"></span>
+      <span class="tick-br" aria-hidden="true"></span>
+
+      <!-- 1. Conectar Release -->
+      <section class="screen" id="screen-1">
+        <h2 class="scr-title">Conectar release</h2>
+        <p class="scr-sub">Ponto de entrada — escolher o que vai ser analisado antes de calcular o risco.</p>
+        <div class="grid-2">
+          <div class="stack">
+            <div>
+              <label class="wf-label">Repositório</label>
+              <div class="field"><span>org/garantiu-api</span><span class="caret">▾</span></div>
+            </div>
+            <div>
+              <label class="wf-label">Branch do release</label>
+              <div class="field"><span>release/2026.09</span><span class="caret">▾</span></div>
+            </div>
+            <div>
+              <label class="wf-label">Comparar desde</label>
+              <div class="field"><span>última tag — v2026.08.3</span><span class="caret">▾</span></div>
+            </div>
+            <div class="row" style="margin-top:6px;">
+              <span class="btn primary">Analisar mudanças →</span>
+              <span class="placeholder-text">≈ 46 commits desde a última tag</span>
+            </div>
+          </div>
+          <div class="wf-box" style="padding:16px;">
+            <label class="wf-label">Integrações</label>
+            <div class="stack" style="gap:10px; margin-top:8px;">
+              <div class="row"><span class="chip lo">conectado</span><span class="placeholder-text">GitHub — pull requests e commits</span></div>
+              <div class="row"><span class="chip mid">parcial</span><span class="placeholder-text">Jenkins — só relatório de cobertura</span></div>
+              <div class="row"><span class="chip hi">pendente</span><span class="placeholder-text">Jira — histórico de incidentes</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="note">
+          <b>Objetivo da tela:</b> hoje o intervalo é escolhido à mão. Sem essa conexão, o resto do fluxo não tem dado real pra calcular nada.
+          <div class="open"><span>Em aberto</span> — dá pra automatizar o gatilho a partir do CI/PR, sem passo manual?</div>
+        </div>
+      </section>
+
+      <!-- 2. Visão geral do risco -->
+      <section class="screen" id="screen-2" hidden>
+        <h2 class="scr-title">Visão geral do risco — release/2026.09</h2>
+        <p class="scr-sub">Tela principal: o que o time olha antes de decidir publicar.</p>
+
+        <div class="score-hero">
+          <div class="score-num">74<small>/100</small></div>
+          <div class="score-detail">
+            <span class="chip hi">risco alto</span>
+            <div class="meter">
+              <div class="track"><div class="fill" style="width:74%; background:var(--risk-hi);"></div></div>
+              <div class="scale"><span>0 baixo</span><span>50 médio</span><span>100 crítico</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="stack">
+            <label class="wf-label">Composição do score</label>
+            <div class="factor-row"><span class="label">Complexidade da mudança</span><div class="factor-track"><div class="factor-fill" style="width:82%;"></div></div><span class="val">82</span></div>
+            <div class="factor-row"><span class="label">Histórico de bugs</span><div class="factor-track"><div class="factor-fill" style="width:61%;"></div></div><span class="val">61</span></div>
+            <div class="factor-row"><span class="label">Saúde dos testes</span><div class="factor-track"><div class="factor-fill" style="width:70%;"></div></div><span class="val">70</span></div>
+            <div class="factor-row"><span class="label">Incidentes anteriores</span><div class="factor-track"><div class="factor-fill" style="width:55%;"></div></div><span class="val">55</span></div>
+            <span class="btn ghost" style="align-self:flex-start; margin-top:6px;">Ver o que testar →</span>
+          </div>
+
+          <div>
+            <label class="wf-label">Módulos mais arriscados</label>
+            <table class="wf-table">
+              <thead><tr><th>Módulo</th><th>Arquivos</th><th>Score</th></tr></thead>
+              <tbody>
+                <tr><td>pagamentos/checkout</td><td class="mono-num">6</td><td><span class="chip hi">89</span></td></tr>
+                <tr><td>auth/sessao</td><td class="mono-num">3</td><td><span class="chip hi">77</span></td></tr>
+                <tr><td>notificacoes/email</td><td class="mono-num">4</td><td><span class="chip mid">58</span></td></tr>
+                <tr><td>catalogo/busca</td><td class="mono-num">9</td><td><span class="chip lo">31</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="note">
+          <b>Objetivo da tela:</b> responder "publica ou não?" em segundos — score + os módulos que concentram o risco, sem abrir o diff inteiro.
+          <div class="open"><span>Em aberto</span> — validar com entrevistas se 4 fatores é confiável, ou se algum pesa mais que os outros.</div>
+        </div>
+      </section>
+
+      <!-- 3. Roteiro de teste manual -->
+      <section class="screen" id="screen-3" hidden>
+        <h2 class="scr-title">Roteiro de teste manual — release/2026.09</h2>
+        <p class="scr-sub">O que só dá pra pegar testando na mão, explicado em português simples — pra quem for testar, com ou sem QA dedicado.</p>
+
+        <div class="row" style="margin-bottom:18px;">
+          <span class="placeholder-text">3 áreas mudaram neste release</span>
+          <span class="chip hi">2 de risco alto</span>
+          <span class="chip mid">1 de risco médio</span>
+        </div>
+
+        <div class="stack" style="gap:16px;">
+          <div class="qa-card">
+            <div class="qa-card-head">
+              <span class="qa-card-title">Pagamento no checkout</span>
+              <span class="chip hi">risco alto</span>
+            </div>
+            <div class="qa-field">
+              <label class="wf-label">O que mudou</label>
+              <p class="qa-text">Mudamos como o parcelamento é calculado e trocamos parte da integração com o gateway de pagamento.</p>
+            </div>
+            <div class="qa-field">
+              <label class="wf-label">Por que testar isso</label>
+              <p class="qa-text">É a parte que mexe direto com o dinheiro do cliente — qualquer erro aqui vira reclamação ou prejuízo na hora.</p>
+            </div>
+            <div class="qa-field">
+              <label class="wf-label">Cenários sugeridos</label>
+              <ul class="qa-list">
+                <li>Pagar com cartão e simular recusa</li>
+                <li>Parcelar em 12x e conferir o valor de cada parcela</li>
+                <li>Cancelar um pagamento no meio do processo</li>
+              </ul>
+            </div>
+            <div class="dev-note">
+              <span class="dev-note-author">m.silva</span> — mudei a regra de arredondamento do parcelamento, testem valores quebrados tipo R$ 99,90 em 7x.
+            </div>
+          </div>
+
+          <div class="qa-card">
+            <div class="qa-card-head">
+              <span class="qa-card-title">Sessão de login</span>
+              <span class="chip hi">risco alto</span>
+            </div>
+            <div class="qa-field">
+              <label class="wf-label">O que mudou</label>
+              <p class="qa-text">Ajustamos o tempo de expiração do token de sessão.</p>
+            </div>
+            <div class="qa-field">
+              <label class="wf-label">Por que testar isso</label>
+              <p class="qa-text">Se expirar cedo demais, o usuário é deslogado no meio de uma compra; se não expirar, é risco de segurança.</p>
+            </div>
+            <div class="qa-field">
+              <label class="wf-label">Cenários sugeridos</label>
+              <ul class="qa-list">
+                <li>Ficar logado e parado por mais de 30 minutos, depois tentar comprar</li>
+                <li>Trocar de aba ou dispositivo com a mesma conta</li>
+              </ul>
+            </div>
+            <div class="dev-note empty">Nenhuma nota deixada ainda — peça pro dev responsável comentar.</div>
+          </div>
+
+          <div class="qa-card">
+            <div class="qa-card-head">
+              <span class="qa-card-title">Email de confirmação de pedido</span>
+              <span class="chip mid">risco médio</span>
+            </div>
+            <div class="qa-field">
+              <label class="wf-label">O que mudou</label>
+              <p class="qa-text">Trocamos o texto e o gatilho do email de confirmação de pedido.</p>
+            </div>
+            <div class="qa-field">
+              <label class="wf-label">Cenários sugeridos</label>
+              <ul class="qa-list">
+                <li>Fazer um pedido e conferir se o email chega</li>
+                <li>Conferir se o link dentro do email funciona</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="note" style="margin-top:20px;">
+          <b>Objetivo da tela:</b> automação cobre o previsível (login, cadastro, integração técnica) — interface, UX e cenário complexo continuam dependendo de teste manual em qualquer empresa. Essa tela é o direcionamento pra esse esforço manual, que hoje só existe numa conversa informal entre dev e quem for testar.
+          <div class="open"><span>Em aberto</span> — validar a linguagem específica com quem testa manualmente no dia a dia, e se "nota do dev" é preenchida na prática ou vira campo vazio ignorado.</div>
+        </div>
+      </section>
+
+      <!-- 4. Suíte automatizada priorizada -->
+      <section class="screen" id="screen-4" hidden>
+        <h2 class="scr-title">Suíte automatizada priorizada</h2>
+        <p class="scr-sub">O que já é automatizado, ordenado por risco. O que não dá pra automatizar está no roteiro de teste manual (tela anterior).</p>
+
+        <div class="row" style="justify-content:space-between; margin-bottom:14px;">
+          <div class="row">
+            <div class="field" style="min-width:160px;"><span>Módulo: todos</span><span class="caret">▾</span></div>
+            <div class="field" style="min-width:200px;"><span class="placeholder-text">Buscar teste…</span></div>
+          </div>
+          <span class="placeholder-text">12 testes prioritários · ≈38 min · cobre 82% do risco</span>
+        </div>
+
+        <table class="wf-table">
+          <thead><tr><th>Teste</th><th>Módulo</th><th>Contribuição</th><th>Tempo</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>test_checkout_cartao_recusado</td><td>pagamentos</td><td class="mono-num">18%</td><td class="mono-num">4 min</td><td><span class="chip hi">a rodar</span></td></tr>
+            <tr><td>test_checkout_parcelamento</td><td>pagamentos</td><td class="mono-num">15%</td><td class="mono-num">3 min</td><td><span class="chip hi">a rodar</span></td></tr>
+            <tr><td>test_sessao_expira_token</td><td>auth</td><td class="mono-num">12%</td><td class="mono-num">2 min</td><td><span class="chip flaky">flaky · 24%</span></td></tr>
+            <tr><td>test_email_confirmacao</td><td>notificações</td><td class="mono-num">7%</td><td class="mono-num">5 min</td><td><span class="chip lo">passou</span></td></tr>
+            <tr><td>test_busca_filtro_preco</td><td>catálogo</td><td class="mono-num">3%</td><td class="mono-num">6 min</td><td><span class="chip lo">passou</span></td></tr>
+          </tbody>
+        </table>
+
+        <div class="note">
+          <b>Objetivo da tela:</b> a parte que já é automatizada não é o gargalo — só precisa rodar na ordem certa e sinalizar teste flaky em vez de deixar o time ignorar silenciosamente. O esforço de verdade está no roteiro manual (tela anterior).
+          <div class="open"><span>Em aberto</span> — "contribuição ao risco" por teste precisa de um cálculo real; hoje é conceito.</div>
+        </div>
+      </section>
+
+      <!-- 5. Detalhe do módulo -->
+      <section class="screen" id="screen-5" hidden>
+        <div class="breadcrumb">Visão geral <span style="opacity:.5;">/</span> <span class="cur">pagamentos/checkout</span></div>
+        <h2 class="scr-title">pagamentos/checkout <span class="chip hi" style="margin-left:6px;">score 89</span></h2>
+        <p class="scr-sub">Por que este módulo está no topo do risco.</p>
+
+        <div class="grid-2">
+          <div class="stack">
+            <label class="wf-label">O que mudou</label>
+            <div class="diff-box">
+              6 arquivos · <span class="add">+142</span> <span class="rem">−38</span><br>
+              checkout/gateway.py<br>
+              checkout/parcelamento.py<br>
+              checkout/webhook_pagamento.py<br>
+              <span class="placeholder-text">+3 arquivos</span>
+            </div>
+
+            <label class="wf-label" style="margin-top:6px;">Testes relacionados</label>
+            <table class="wf-table">
+              <thead><tr><th>Cobertura</th><th>Flakiness (30d)</th></tr></thead>
+              <tbody><tr><td class="mono-num">64%</td><td class="mono-num">24%</td></tr></tbody>
+            </table>
+          </div>
+
+          <div class="stack">
+            <label class="wf-label">Histórico de bugs</label>
+            <div class="wf-box" style="padding:12px 14px;">
+              <div class="stack" style="gap:8px;">
+                <div class="row" style="justify-content:space-between;"><span class="placeholder-text">BUG-2231 — cobrança duplicada</span><span class="mono-num placeholder-text">mar/26</span></div>
+                <div class="row" style="justify-content:space-between;"><span class="placeholder-text">BUG-2109 — parcela arredondada errado</span><span class="mono-num placeholder-text">jan/26</span></div>
+              </div>
+            </div>
+            <label class="wf-label" style="margin-top:6px;">Incidentes em produção</label>
+            <div class="wf-box" style="padding:12px 14px;">
+              <div class="row" style="justify-content:space-between;"><span class="placeholder-text">INC-58 — gateway fora do ar 22 min</span><span class="mono-num placeholder-text">fev/26</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          <b>Objetivo da tela:</b> dar contexto pra alguém confiar no score em vez de só aceitar um número — o "porquê" por trás do 89.
+        </div>
+      </section>
+
+      <!-- 6. Decisão de publicação -->
+      <section class="screen" id="screen-6" hidden>
+        <h2 class="scr-title">Decisão de publicação</h2>
+        <p class="scr-sub">Fecha o loop: publica ou não, e fica registrado com base em quê.</p>
+
+        <div class="grid-2">
+          <div class="wf-box" style="padding:18px;">
+            <div class="row" style="justify-content:space-between; margin-bottom:14px;">
+              <span class="placeholder-text">Score do release</span>
+              <span class="chip hi">74 · risco alto</span>
+            </div>
+            <div class="row" style="justify-content:space-between; margin-bottom:14px;">
+              <span class="placeholder-text">Checklist de testes</span>
+              <span class="mono-num">9 / 12 concluídos</span>
+            </div>
+            <div class="checklist" style="margin-bottom:16px;">
+              <div class="check-item"><div class="box done"></div><span class="placeholder-text">Testes de pagamentos/checkout</span></div>
+              <div class="check-item"><div class="box"></div><span class="placeholder-text">Teste flaky de sessão revisado manualmente</span></div>
+            </div>
+            <div class="row" style="margin-bottom:14px;">
+              <div class="box" style="width:15px;height:15px;border:1.5px solid var(--line);border-radius:4px;flex-shrink:0;"></div>
+              <span class="placeholder-text" style="font-size:12px;">Estou ciente do risco e dos testes pendentes</span>
+            </div>
+            <div class="row">
+              <span class="btn danger-outline">Publicar mesmo assim</span>
+              <span class="btn ghost">Cancelar publicação</span>
+            </div>
+          </div>
+
+          <div>
+            <label class="wf-label">Registro (auditoria)</label>
+            <table class="wf-table">
+              <thead><tr><th>Quando</th><th>Quem</th><th>Ação</th></tr></thead>
+              <tbody>
+                <tr><td class="mono-num placeholder-text">09/09 14:02</td><td class="placeholder-text">m.silva</td><td class="placeholder-text">reprovou (score alto)</td></tr>
+                <tr><td class="mono-num placeholder-text">09/09 16:40</td><td class="placeholder-text">m.silva</td><td class="placeholder-text">reexecutou testes</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="note">
+          <b>Objetivo da tela:</b> deixar explícito quem decidiu publicar com risco pendente — hoje isso é implícito e ninguém assina embaixo.
+        </div>
+      </section>
+
+      <!-- 7. Histórico e tendências -->
+      <section class="screen" id="screen-7" hidden>
+        <h2 class="scr-title">Histórico &amp; tendências</h2>
+        <p class="scr-sub">O score só ganha confiança se acertar ao longo do tempo.</p>
+
+        <label class="wf-label">Risco previsto × falha real (últimos 6 releases)</label>
+        <div class="bars-row">
+          <div class="bar-pair"><div class="bars"><div class="bar" style="height:38%;"></div><div class="bar real" style="height:20%;"></div></div><span class="dot" style="background:var(--risk-lo);"></span><span class="tag">2026.03</span></div>
+          <div class="bar-pair"><div class="bars"><div class="bar" style="height:52%;"></div><div class="bar real" style="height:48%;"></div></div><span class="dot" style="background:var(--risk-lo);"></span><span class="tag">2026.04</span></div>
+          <div class="bar-pair"><div class="bars"><div class="bar" style="height:64%;"></div><div class="bar real" style="height:71%;"></div></div><span class="dot" style="background:var(--risk-hi);"></span><span class="tag">2026.05</span></div>
+          <div class="bar-pair"><div class="bars"><div class="bar" style="height:45%;"></div><div class="bar real" style="height:30%;"></div></div><span class="dot" style="background:var(--risk-lo);"></span><span class="tag">2026.06</span></div>
+          <div class="bar-pair"><div class="bars"><div class="bar" style="height:70%;"></div><div class="bar real" style="height:65%;"></div></div><span class="dot" style="background:var(--risk-hi);"></span><span class="tag">2026.07</span></div>
+          <div class="bar-pair"><div class="bars"><div class="bar" style="height:58%;"></div><div class="bar real" style="height:22%;"></div></div><span class="dot" style="background:var(--risk-lo);"></span><span class="tag">2026.08</span></div>
+        </div>
+        <div class="legend">
+          <span><span class="sw" style="background:var(--line);"></span>score previsto</span>
+          <span><span class="sw" style="background:var(--ink-soft);"></span>impacto real em produção</span>
+          <span><span class="sw" style="background:var(--risk-hi); border-radius:50%;"></span>falhou após publicar</span>
+        </div>
+
+        <table class="wf-table" style="margin-top:22px;">
+          <thead><tr><th>Release</th><th>Score previsto</th><th>Resultado</th><th>Tempo de teste</th></tr></thead>
+          <tbody>
+            <tr><td class="mono-num">2026.08</td><td class="mono-num">58</td><td><span class="chip lo">ok</span></td><td class="mono-num">51 min</td></tr>
+            <tr><td class="mono-num">2026.07</td><td class="mono-num">70</td><td><span class="chip hi">falhou</span></td><td class="mono-num">1h12</td></tr>
+            <tr><td class="mono-num">2026.06</td><td class="mono-num">45</td><td><span class="chip lo">ok</span></td><td class="mono-num">40 min</td></tr>
+          </tbody>
+        </table>
+
+        <div class="note">
+          <b>Objetivo da tela:</b> mostrar se o score bate com o que realmente quebrou — é isso que faz o time confiar na ferramenta em vez de rodar tudo "por garantia".
+          <div class="open"><span>Em aberto</span> — as ~3 entrevistas do roteiro vão dizer se esse tipo de retrospectiva já existe hoje de outro jeito.</div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<script>
+  var SCREENS = [
+    { id: "screen-1", n: "01", t: "Conectar release", d: "Repositório, branch, intervalo" },
+    { id: "screen-2", n: "02", t: "Visão geral do risco", d: "Score + módulos críticos" },
+    { id: "screen-3", n: "03", t: "Roteiro de teste manual", d: "Onde focar, com ou sem QA" },
+    { id: "screen-4", n: "04", t: "Suíte automatizada", d: "O que já roda sozinho" },
+    { id: "screen-5", n: "05", t: "Detalhe do módulo", d: "Por que está arriscado" },
+    { id: "screen-6", n: "06", t: "Decisão de publicação", d: "Publicar, cancelar, registrar" },
+    { id: "screen-7", n: "07", t: "Histórico & tendências", d: "Previsto x aconteceu" }
+  ];
+
+  var stepsEl = document.getElementById("steps");
+  var titleEl = document.getElementById("stage-title");
+  var metaEl = document.getElementById("stage-meta");
+
+  SCREENS.forEach(function (s, i) {
+    var btn = document.createElement("button");
+    btn.className = "step-btn";
+    btn.setAttribute("data-target", s.id);
+    btn.setAttribute("aria-current", "false");
+    btn.innerHTML =
+      '<span class="n">' + s.n + '</span>' +
+      '<span><span class="t">' + s.t + '</span><span class="d">' + s.d + '</span></span>';
+    btn.addEventListener("click", function () { show(i); });
+    stepsEl.appendChild(btn);
+  });
+
+  function show(index) {
+    SCREENS.forEach(function (s, i) {
+      document.getElementById(s.id).hidden = i !== index;
+      stepsEl.children[i].setAttribute("aria-current", i === index ? "true" : "false");
+    });
+    var s = SCREENS[index];
+    titleEl.textContent = s.n + " · " + s.t;
+    metaEl.textContent = "tela " + (index + 1) + " de " + SCREENS.length;
+  }
+
+  document.addEventListener("keydown", function (e) {
+    var current = SCREENS.findIndex(function (s) { return !document.getElementById(s.id).hidden; });
+    if (e.key === "ArrowRight" && current < SCREENS.length - 1) show(current + 1);
+    if (e.key === "ArrowLeft" && current > 0) show(current - 1);
+  });
+
+  show(0);
+</script>

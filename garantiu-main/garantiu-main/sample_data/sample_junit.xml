@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+  <testsuite name="garantiu-demo" tests="4">
+    <testcase classname="checkout.test_gateway" name="test_pagamento_aprovado" time="0.01"/>
+    <testcase classname="checkout.test_gateway" name="test_pagamento_recusado" time="0.02">
+      <failure message="AssertionError">expected True, got False</failure>
+    </testcase>
+    <testcase classname="auth.test_sessao" name="test_expira_token" time="0.03"/>
+    <testcase classname="catalogo.test_busca" name="test_filtro_preco" time="0.01"/>
+  </testsuite>
+</testsuites>
