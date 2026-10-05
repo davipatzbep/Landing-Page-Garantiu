@@ -1,4 +1,3 @@
-// Troca de abas na seção "Telas do MVP"
 document.querySelectorAll('.aba').forEach(function (aba) {
   aba.addEventListener('click', function () {
     document.querySelectorAll('.aba').forEach(function (a) { a.classList.remove('ativa'); });
@@ -8,7 +7,6 @@ document.querySelectorAll('.aba').forEach(function (aba) {
   });
 });
 
-// Efeito de aparecer suavemente ao rolar a página
 const observador = new IntersectionObserver(function (entradas) {
   entradas.forEach(function (entrada) {
     if (entrada.isIntersecting) {
