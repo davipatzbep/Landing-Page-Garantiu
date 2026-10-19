@@ -37,7 +37,7 @@ header{position:sticky; top:0; z-index:30; background:rgba(14,22,56,.85); backdr
   content:""; position:absolute; bottom:-180px; left:-160px; width:420px; height:420px;
   background:radial-gradient(circle, var(--teal) 0%, transparent 70%); opacity:.09; border-radius:50%; pointer-events:none;
 }
-.logo-principal{width:128px; height:128px; margin:0 auto 22px; object-fit:contain;}
+.logo-principal{width:156px; height:156px; margin:0 auto 22px; object-fit:contain;}
 .principal .etiqueta{color:var(--teal); font-weight:700; font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:16px;}
 .principal h1{font-size:clamp(32px,5.4vw,54px); font-weight:900; letter-spacing:-0.02em; margin-bottom:16px; position:relative;}
 .principal h1 .destaque{color:var(--teal);}
