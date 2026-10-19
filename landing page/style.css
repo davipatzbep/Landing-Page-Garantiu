@@ -135,28 +135,6 @@ section{padding:68px 24px;}
 footer{border-top:1px solid var(--border); padding:28px 24px; text-align:center; color:var(--faint); font-size:12.5px; display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;}
 footer img{width:18px; height:18px; object-fit:contain;}
 
-
-.botao-chamada-final {
-  display: inline-block;
-  padding: 12px 28px;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  background: transparent;
-  color: var(--text);
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background .2s, border-color .2s, transform .2s;
-}
-
-.botao-chamada-final:hover {
-  background: var(--card-alt);
-  border-color: var(--teal);
-  transform: translateY(-1px);
-}
-
-
 @media (max-width:760px){
   .etapas{grid-template-columns:1fr;}
   .grade-prova{grid-template-columns:1fr;}
