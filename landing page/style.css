@@ -15,7 +15,7 @@ img{max-width:100%; display:block;}
 header{position:sticky; top:0; z-index:30; background:rgba(14,22,56,.85); backdrop-filter:blur(10px); border-bottom:1px solid var(--border);}
 .navegacao{display:flex; align-items:center; justify-content:space-between; padding:14px 24px;}
 .marca{display:flex; align-items:center; gap:10px; font-weight:900; font-size:17px;}
-.marca img{width:44px; height:44px; object-fit:contain; flex-shrink:0;}
+.marca img{width:85px; height:85px; object-fit:contain; flex-shrink:0;}
 .links-navegacao{display:flex; gap:28px; font-size:13.5px; color:var(--dim); font-weight:500;}
 .links-navegacao a:hover{color:var(--text);}
 .botao{
@@ -37,7 +37,7 @@ header{position:sticky; top:0; z-index:30; background:rgba(14,22,56,.85); backdr
   content:""; position:absolute; bottom:-180px; left:-160px; width:420px; height:420px;
   background:radial-gradient(circle, var(--teal) 0%, transparent 70%); opacity:.09; border-radius:50%; pointer-events:none;
 }
-.logo-principal{width:112px; height:112px; margin:0 auto 22px; object-fit:contain;}
+.logo-principal{width:140px; height:140px; margin:0 auto 22px; object-fit:contain;}
 .principal .etiqueta{color:var(--teal); font-weight:700; font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:16px;}
 .principal h1{font-size:clamp(32px,5.4vw,54px); font-weight:900; letter-spacing:-0.02em; margin-bottom:16px; position:relative;}
 .principal h1 .destaque{color:var(--teal);}
